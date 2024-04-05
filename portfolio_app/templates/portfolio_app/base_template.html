@@ -18,11 +18,15 @@
 
      <!-- Navbar-->
      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-       <img src="{% static 'images/gym.jpg' %}">
+       <img src="{% static 'images/' %}">
        <div class="container-fluid">
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
          </button>
+         <button type="submit"> <a href="/signup"> SignUp</a></button>
+         <button type="submit"> <a href="/login"> Login</a></button>
+         <button type="submit"> <a href="/logout"> Log Out</a></button>
+
          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
            <div class="navbar-nav">
              <!--  {% url 'index' %}  is defined in url path to dynamically create url -->

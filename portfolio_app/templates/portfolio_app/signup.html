@@ -1,0 +1,36 @@
+<!-- inherit from base_template.html-->
+{% extends "portfolio_app/base_template.html" %}
+
+<!-- Replace block content in base_template.html -->
+{% block content %}
+    <h3>Sign Up </h3>
+
+    <form action="/signup" method="post">
+    {% csrf_token %}
+        <label for="">Username</label>
+        <input type="text" id="username" name="username" Required>
+        <br>
+        <br>
+        <label for="">First Name</label>
+        <input type="text" id="firstname" name="firstname" Required>
+        <br>
+        <br>
+        <label for="">Last Name</label>
+        <input type="text" id="lastname" name="lastname" Required>
+        <br>
+        <br>
+        <label for="">Email Address</label>
+        <input type="email" id="email" name="email" Required>
+        <br>
+        <br>
+        <label for="">Password</label>
+        <input type="password" id="password1" name="password1" Required>
+        <br>
+        <br>
+        <label for="">Confirm Password</label>
+        <input type="password" id="password2" name="password2" Required>
+        <br>
+        <br>
+        <button type="submit">Sign Up</button>
+    </form>
+{% endblock %}
