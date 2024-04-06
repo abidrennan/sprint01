@@ -1,36 +1,23 @@
-<!-- inherit from base_template.html-->
-{% extends "portfolio_app/base_template.html" %}
-
-<!-- Replace block content in base_template.html -->
+{% extends 'portfolio_app/main.html' %}
 {% block content %}
-    <h3>Sign Up </h3>
 
-    <form action="/signup" method="post">
-    {% csrf_token %}
-        <label for="">Username</label>
-        <input type="text" id="username" name="username" Required>
-        <br>
-        <br>
-        <label for="">First Name</label>
-        <input type="text" id="firstname" name="firstname" Required>
-        <br>
-        <br>
-        <label for="">Last Name</label>
-        <input type="text" id="lastname" name="lastname" Required>
-        <br>
-        <br>
-        <label for="">Email Address</label>
-        <input type="email" id="email" name="email" Required>
-        <br>
-        <br>
-        <label for="">Password</label>
-        <input type="password" id="password1" name="password1" Required>
-        <br>
-        <br>
-        <label for="">Confirm Password</label>
-        <input type="password" id="password2" name="password2" Required>
-        <br>
-        <br>
-        <button type="submit">Sign Up</button>
+<div class="header-bar">
+    <h1>Sign Up</h1>
+</div>
+
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        <label>{{form.username.label}}</label>
+        {{form.username}}
+        <label>{{form.password1.label}}</label>
+        {{form.password1}}
+        <label>{{form.password2.label}}</label>
+        {{form.password2}}
+     
+        <input style="margin-top:10px;" class="button" type="submit" value="Sign Up">
     </form>
-{% endblock %}
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</div>
+
+{% endblock content %}

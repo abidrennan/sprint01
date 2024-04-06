@@ -1,0 +1,12 @@
+{% extends 'portfolio_app/main.html' %}
+{% block content %}
+
+<div class="header-bar image">
+    <a href ="{% url 'skills' %}">&#8592 Back</a>
+</div>
+
+<div class="card-body">
+<h3>Skill: {{skill}}</h3>
+</div>
+
+{% endblock content%}

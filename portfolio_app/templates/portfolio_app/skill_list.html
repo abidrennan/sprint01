@@ -1,0 +1,48 @@
+
+{% extends 'portfolio_app/main.html' %}
+{% block content %}
+{% load static %}
+<div class="header-bar image">
+    <div>
+        <h1>Hello {{request.user|title}}!</h1>
+        <h3 style="margin:0">You have {{count}} skill{{count|pluralize:"s"}} to work on</h3>
+    </div>
+    {% if request.user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <input class="logout-button" type="submit" value="Logout">
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+
+<div class="skill-items-wrapper image">
+    {% for skill in skills %}
+    <div class="skill-wrapper">
+        {% if skill.complete %}
+        <div class ="skill-title">
+            <div class="skill-complete-icon"></div>
+            <i><s><a href="{% url 'skill-update' skill.id %}">{{skill}}</a></s></i>
+        </div>
+
+        {% else %}
+        <div class ="skill-title">
+              <div class="skill-incomplete-icon"></div>
+              <a href="{% url 'skill-update' skill.id %}">{{skill}}</a>
+        </div>
+       {% endif %}
+       <a class="view-link" href="{% url 'skill' skill.id %}">&#128065  View</a>
+       <a class="edit-link" href="{% url 'skill-update' skill.id %}">&#9998  Edit</a>
+       <a class="delete-link" href="{% url 'skill-delete' skill.id %}">&#215  Delete</a>
+    </div> 
+
+    {% empty %}
+    <h3>You have no skills in your list</h3>
+    {% endfor %}
+</div>
+<br>
+<br>
+<a class="add-link" href="{% url 'skill-create' %}">+ Add Skill </a>
+
+{% endblock content %}

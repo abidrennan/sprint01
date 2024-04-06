@@ -1,36 +1,69 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth.models import User
-from django.contrib import messages
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.urls import reverse_lazy
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from .models import Skill
 
-# Create your views here.
-def index(request):
-    return render(request, 'portfolio_app/index.html')
+class SkillList(LoginRequiredMixin, ListView):
+    model = Skill
+    context_object_name = 'skills'
 
-def signup(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        firstname = request.POST.get('firstname')
-        lastname = request.POST.get('lastname')
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['skills'] = context['skills'].filter(user=self.request.user)
+        context['count'] = context['skills'].filter(complete=False).count()
+        return context
 
-        myUser = User.objects.create_user(username, email, password1)
-        myUser.first_name = firstname
-        myUser.last_name = lastname
+class SkillDetail(LoginRequiredMixin, DetailView):
+    model = Skill
+    context_obect_name = 'skill'
 
-        myUser.save()
+class SkillCreate(LoginRequiredMixin, CreateView):
+    model = Skill
+    fields = ['title', 'description', 'complete']
+    success_url = reverse_lazy("skills")
 
-        messages.success(request, "Your account has been successfully created!")
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(SkillCreate, self).form_valid(form)
 
-        return redirect('login')
+class SkillUpdate(LoginRequiredMixin, UpdateView):
+    model = Skill
+    fields = ['title', 'description', 'complete']
+    success_url = reverse_lazy('skills')
 
+class SkillDelete(LoginRequiredMixin, DeleteView):
+    model = Skill
+    context_object_name = 'skill'
+    success_url = reverse_lazy('skills')
+    template_name = 'portfolio_app/delete_skill.html'
 
-    return render(request, "portfolio_app/signup.html")
+class SkillLogin(LoginView):
+    template_name = 'portfolio_app/login.html'
+    fields = '__all__'
+    redirect_authenticated_user = True
 
-def login(request):
-    return render(request, "portfolio_app/login.html")
+    def get_success_url(self):
+        return reverse_lazy('skills')
+    
+class SkillSignUp(FormView):
+    template_name = 'portfolio_app/signup.html'
+    form_class = UserCreationForm
+    redirect_authenticated_user = True
+    success_url = reverse_lazy('skills')
 
-def logout(request):
-    pass
+    def form_valid(self, form):
+        user = form.save()
+        if user is not None:
+            login(self.request, user)
+        return super(SkillSignUp, self).form_valid(form)
+    
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('skills')
+        return super(SkillSignUp, self).get(*args, **kwargs)

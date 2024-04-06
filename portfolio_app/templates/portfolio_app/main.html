@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>hey</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+        <style>
+            body {
+                background-color: #FAFAFA; 
+                font-family: "Tilt Neon", sans-serif;
+                padding-top: 0px;
+            }
+
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6,
+                {
+                    font-family: "Montserrat", sans-serif;
+            }
+
+            a,
+            p{
+                color: #000000
+            }
+
+
+            .container{
+                max-width: 600px;
+                margin: auto;
+                background-color: #F0FFF;
+                -webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+                box-shadow: 2px 2px 13px -4px rgba(0, 0, 0, 0.21);
+            }
+
+            .header-bar {
+                display: flex;
+                justify-content: space-between;
+                color: #000000;
+                padding: 10px;
+                border-radius: 5px 5px 0 0;
+                background: #48D1CC;
+            }
+
+            .header-bar a {
+                color: #000000(247, 247, 247);
+                text-decoration: none;
+            }
+
+            .skill-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 20px;
+                background-color: #fff;
+                border-top: 1px solid #dfe4ea;
+                overflow: hidden;
+            }
+
+            .delete-link {
+                text-decoration: none;
+                font-weight: 900;
+                color: #cf4949;
+                font-size: 16px;
+                line-height: 0;
+                padding: 20px 0px;
+            }
+
+            .edit-link {
+                text-decoration: none;
+                font-weight: 900;
+                color: #0000CD;
+                font-size: 16px;
+                line-height: 0;
+                padding: 20px 0px;
+            }
+
+            .view-link {
+                text-decoration: none;
+                font-weight: 900;
+                color: #2E8B57;
+                font-size: 16px;
+                line-height: 0;
+                padding: 20px 0px;
+            }
+
+            .add-link {
+                text-decoration: none;
+                font-weight: 900;
+                color: #c000000;
+                font-size: 13px;
+                line-height: 1;
+                padding: 20px 5px;
+            }
+
+            input[type=text],
+            input[type=password],
+            textarea {
+                border: 1.5px solid #757575;
+                border-radius: 7px;
+                padding: 10px;
+                width: 90%;
+                background-color: #fff;
+            }
+
+            .button {
+                border: 1px solid #757575;
+                background-color: #fff;
+                color: #000000;
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 5px;
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            .logout-button {
+                border: 1px solid #757575;
+               background-color: #fff;
+                color: #000000;
+                padding: 4px;
+                font-size: 15px;
+                border-radius: 6px;
+                cursor: pointer;
+                text-decoration: none;
+            }
+
+            .card-body {
+                padding: 25px;
+            }
+
+            .image{
+                background-image: url('/static/images/bg.jpg');
+               
+               
+            }
+
+        </style>
+    </head>
+
+        <div class="container">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'portfolio_app/main.html' %}
+{% block content %}
+
+<div class="header-bar image">
+<a href ="{% url 'skills' %}">Cancel</a>
+</div>
+
+<div class="card-body">
+<form method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{skill}}"?</p>
+    <input class="button" type="submit" value="Delete">
+   
+</form>
+</div>
+{% endblock content %}
